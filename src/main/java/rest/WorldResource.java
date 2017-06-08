@@ -82,13 +82,24 @@ public class WorldResource {
                 jO.addProperty("capital", "none");
             }
             
-            
             jA.add(jO);
         }
         
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
         return gson.toJson(jA);
     
+    }
+    
+    @GET
+    @Path("/pgt/{pop}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getGreaterPop(@PathParam("pop") int population) {
+        List<Country> countries = facade.getCountriesGreaterThan(population);
+        System.out.println(countries+" here");
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        
+        return gson.toJson(countries);
+
     }
     
         /**
