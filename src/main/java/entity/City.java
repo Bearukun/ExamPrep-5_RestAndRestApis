@@ -5,6 +5,7 @@
  */
 package entity;
 
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.Collection;
 import java.util.List;
@@ -45,20 +46,24 @@ public class City implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ID")
+    @Expose
     private Integer id;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 35)
     @Column(name = "Name")
+    @Expose
     private String name;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 20)
     @Column(name = "District")
+    @Expose
     private String district;
     @Basic(optional = false)
     @NotNull
     @Column(name = "Population")
+    @Expose
     private int population;
     @OneToMany(mappedBy = "capital")
     private Collection<Country> countryCollection;
