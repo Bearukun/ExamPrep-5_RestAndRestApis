@@ -124,14 +124,14 @@ public class Country implements Serializable {
     private String code2;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
     @Expose
-    private transient Collection<CountryLanguage> countryLanguageCollection;
+    private Collection<CountryLanguage> countryLanguageCollection;
     @JoinColumn(name = "Capital", referencedColumnName = "ID")
     @ManyToOne
     @Expose
     private City capital;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "countryCode")
     @Expose
-    private transient Collection<City> cityCollection;
+    private Collection<City> cityCollection;
 
     public Country() {
     }
