@@ -1,8 +1,10 @@
 package utility;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import entity.City;
 import entity.Country;
+import java.util.Calendar;
 
 import java.util.List;
 
@@ -12,7 +14,8 @@ import java.util.List;
  */
 public class JSONConverter {
 
-    private Gson gson = new com.google.gson.GsonBuilder().setPrettyPrinting().create();
+       GsonBuilder builder = new GsonBuilder().excludeFieldsWithoutExposeAnnotation();
+       Gson gson = builder.create();
 
     public Country getCountryFromJson(String js) {
         

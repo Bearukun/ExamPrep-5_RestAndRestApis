@@ -7,6 +7,7 @@ package entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -116,7 +117,7 @@ public class City implements Serializable {
         return countryCollection;
     }
 
-    public void setCountryCollection(Collection<Country> countryCollection) {
+    public void setCountryCollection(List<Country> countryCollection) {
         this.countryCollection = countryCollection;
     }
 

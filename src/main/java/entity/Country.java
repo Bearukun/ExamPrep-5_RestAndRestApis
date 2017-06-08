@@ -5,8 +5,10 @@
  */
 package entity;
 
+import com.google.gson.annotations.Expose;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -55,64 +57,81 @@ public class Country implements Serializable {
     @NotNull
     @Size(min = 1, max = 3)
     @Column(name = "Code")
+    @Expose
     private String code;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 52)
     @Column(name = "Name")
+    @Expose
     private String name;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 13)
     @Column(name = "Continent")
+    @Expose
     private String continent;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 26)
     @Column(name = "Region")
+    @Expose
     private String region;
     @Basic(optional = false)
     @NotNull
     @Column(name = "SurfaceArea")
+    @Expose
     private float surfaceArea;
     @Column(name = "IndepYear")
+    @Expose
     private Short indepYear;
     @Basic(optional = false)
     @NotNull
     @Column(name = "Population")
+    @Expose
     private int population;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "LifeExpectancy")
+    @Expose
     private Float lifeExpectancy;
     @Column(name = "GNP")
+    @Expose
     private Float gnp;
     @Column(name = "GNPOld")
+    @Expose
     private Float gNPOld;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "LocalName")
+    @Expose
     private String localName;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
     @Column(name = "GovernmentForm")
+    @Expose
     private String governmentForm;
     @Size(max = 60)
     @Column(name = "HeadOfState")
+    @Expose
     private String headOfState;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 2)
     @Column(name = "Code2")
+    @Expose
     private String code2;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
-    private Collection<CountryLanguage> countryLanguageCollection;
+    @Expose
+    private transient Collection<CountryLanguage> countryLanguageCollection;
     @JoinColumn(name = "Capital", referencedColumnName = "ID")
     @ManyToOne
+    @Expose
     private City capital;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "countryCode")
-    private Collection<City> cityCollection;
+    @Expose
+    private transient Collection<City> cityCollection;
 
     public Country() {
     }
@@ -250,7 +269,7 @@ public class Country implements Serializable {
         return countryLanguageCollection;
     }
 
-    public void setCountryLanguageCollection(Collection<CountryLanguage> countryLanguageCollection) {
+    public void setCountryLanguageCollection(List<CountryLanguage> countryLanguageCollection) {
         this.countryLanguageCollection = countryLanguageCollection;
     }
 
@@ -267,7 +286,7 @@ public class Country implements Serializable {
         return cityCollection;
     }
 
-    public void setCityCollection(Collection<City> cityCollection) {
+    public void setCityCollection(List<City> cityCollection) {
         this.cityCollection = cityCollection;
     }
 
@@ -295,5 +314,5 @@ public class Country implements Serializable {
     public String toString() {
         return "entity.Country[ code=" + code + " ]";
     }
-    
+
 }
