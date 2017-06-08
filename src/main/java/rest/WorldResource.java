@@ -5,6 +5,10 @@
  */
 package rest;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import entity.Country;
 import facade.Facade;
 import java.util.List;
@@ -54,6 +58,31 @@ public class WorldResource {
         List<Country> countries = facade.getCountries();
    
         return converter.getJSONFromCountries(countries);
+    
+    }
+    
+    @GET
+    @Path("cncn")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getCNCN() {
+        
+        List<Country> countries = facade.getCountries();
+        
+        JsonArray jA = new JsonArray();
+        
+        for (int i = 0; i < countries.size(); i++) {
+        JsonObject jO = new JsonObject();
+            
+            jO.addProperty("code", countries.get(i).getCode());
+            jO.addProperty("name", countries.get(i).getName());
+            jO.addProperty("continent", countries.get(i).getContinent());
+//            jO.addProperty("capital", countries.get(i).getCapital().getName());
+            jO.addProperty("capital", countries.get(i).getCapital().getId());
+            jA.add(jO);
+        }
+        
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(jA);
     
     }
     
