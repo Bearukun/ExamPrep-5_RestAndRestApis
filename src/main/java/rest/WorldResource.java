@@ -44,7 +44,7 @@ public class WorldResource {
     }
 
     /**
-     * Method to return every country object from the mySQL database
+     * Method to return every country object from the mySQL database.
      * @return A list with every object in JSON format
      */
     @GET
