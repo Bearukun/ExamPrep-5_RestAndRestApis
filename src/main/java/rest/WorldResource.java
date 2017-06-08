@@ -76,8 +76,13 @@ public class WorldResource {
             jO.addProperty("code", countries.get(i).getCode());
             jO.addProperty("name", countries.get(i).getName());
             jO.addProperty("continent", countries.get(i).getContinent());
-//            jO.addProperty("capital", countries.get(i).getCapital().getName());
-            jO.addProperty("capital", countries.get(i).getCapital().getId());
+            try {
+                jO.addProperty("capital", countries.get(i).getCapital().getName());
+            } catch (Exception e) {
+                jO.addProperty("capital", "none");
+            }
+            
+            
             jA.add(jO);
         }
         
