@@ -37,15 +37,24 @@ public class Facade {
 
     }
     
-    public List<Country> getCountriesGreaterThan(int number) {
+    public List<Country> getCountriesGreaterThan(long number) {
 
         EntityManager em = emf.createEntityManager();
-        TypedQuery<Country> result = em.createQuery("SELECT c FROM Country c WHERE c.population > '500000'", Country.class);
+//        TypedQuery<Country> result1 = em.createQuery("SELECT c FROM Country c WHERE c.population > '1000000000'", Country.class);
+//        List<Country> countries = result1.getResultList();
+//        return countries;
 //        TypedQuery<Country> result = em.createQuery("SELECT c FROM Country c WHERE c.population > :number", Country.class);
 //        List<Country> countries = result.setParameter("number", number).getResultList();
-        List<Country> countries = result.getResultList();
-        return countries;
 
+        
+    //return 
+            
+//        TypedQuery<Country> result = em.createQuery("SELECT c FROM Country c WHERE c.population > ?1", Country.class);
+        TypedQuery<Country> result = em.createQuery("SELECT c FROM Country c WHERE c.population > :number", Country.class);
+        List<Country> countries = result.setParameter("number", number).getResultList();
+//        result.setParameter(1, number);
+//        List<Country> countries = (List<Country>) result.getResultList();
+        return countries;
     }
 
 }

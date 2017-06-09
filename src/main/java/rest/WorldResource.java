@@ -71,7 +71,8 @@ public class WorldResource {
         JsonArray jA = new JsonArray();
         
         for (int i = 0; i < countries.size(); i++) {
-        JsonObject jO = new JsonObject();
+            
+            JsonObject jO = new JsonObject();
             
             jO.addProperty("code", countries.get(i).getCode());
             jO.addProperty("name", countries.get(i).getName());
@@ -96,9 +97,27 @@ public class WorldResource {
     public String getGreaterPop(@PathParam("pop") int population) {
         List<Country> countries = facade.getCountriesGreaterThan(population);
         System.out.println(countries+" here");
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
         
-        return gson.toJson(countries);
+        JsonArray jA = new JsonArray();
+        
+        for (int i = 0; i < countries.size(); i++) {
+            
+            JsonObject jO = new JsonObject();
+            
+            jO.addProperty("code", countries.get(i).getCode());
+            jO.addProperty("name", countries.get(i).getName());
+            jO.addProperty("continent", countries.get(i).getContinent());
+            try {
+                jO.addProperty("capital", countries.get(i).getCapital().getName());
+            } catch (Exception e) {
+                jO.addProperty("capital", "none");
+            }
+            
+            jA.add(jO);
+        }
+        
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(jA);
 
     }
     

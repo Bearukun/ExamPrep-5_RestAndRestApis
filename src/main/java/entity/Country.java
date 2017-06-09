@@ -89,7 +89,7 @@ public class Country implements Serializable {
     @NotNull
     @Column(name = "Population")
     @Expose
-    private int population;
+    private long population;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "LifeExpectancy")
     @Expose
@@ -200,7 +200,7 @@ public class Country implements Serializable {
         this.indepYear = indepYear;
     }
 
-    public int getPopulation() {
+    public long getPopulation() {
         return population;
     }
 

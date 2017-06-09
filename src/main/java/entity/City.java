@@ -64,7 +64,7 @@ public class City implements Serializable {
     @NotNull
     @Column(name = "Population")
     @Expose
-    private int population;
+    private long population;
     @OneToMany(mappedBy = "capital")
     private Collection<Country> countryCollection;
     @JoinColumn(name = "CountryCode", referencedColumnName = "Code")
@@ -109,7 +109,7 @@ public class City implements Serializable {
         this.district = district;
     }
 
-    public int getPopulation() {
+    public long getPopulation() {
         return population;
     }
 
