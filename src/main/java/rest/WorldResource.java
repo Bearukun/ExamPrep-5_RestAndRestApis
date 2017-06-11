@@ -9,6 +9,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import entity.City;
 import entity.Country;
 import facade.Facade;
 import java.util.List;
@@ -96,7 +97,6 @@ public class WorldResource {
     @Produces(MediaType.APPLICATION_JSON)
     public String getGreaterPop(@PathParam("pop") int population) {
         List<Country> countries = facade.getCountriesGreaterThan(population);
-        System.out.println(countries+" here");
         
         JsonArray jA = new JsonArray();
         
@@ -113,6 +113,28 @@ public class WorldResource {
                 jO.addProperty("capital", "none");
             }
             
+            jA.add(jO);
+        }
+        
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        return gson.toJson(jA);
+
+    }
+    
+    @GET
+    @Path("/gccc/{code}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String getCitiesFromCountryCode(@PathParam("code") String code) {
+        List<City> cities = facade.getCitiesInCountry(code);
+        
+        JsonArray jA = new JsonArray();
+        
+        for (int i = 0; i < cities.size(); i++) {
+            
+            JsonObject jO = new JsonObject();
+            
+            jO.addProperty("name", cities.get(i).getName());
+            jO.addProperty("continent", cities.get(i).getPopulation());
             jA.add(jO);
         }
         
