@@ -19,6 +19,7 @@ import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.Produces;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
 import javax.ws.rs.PathParam;
@@ -124,7 +125,7 @@ public class WorldResource {
     @GET
     @Path("/gccc/{code}")
     @Produces(MediaType.APPLICATION_JSON)
-    public String getCitiesFromCountryCode(@PathParam("code") String code) {
+    public String getCitiesFromCountryCode(@PathParam("code") Country code) {
         List<City> cities = facade.getCitiesInCountry(code);
         
         JsonArray jA = new JsonArray();
@@ -134,7 +135,7 @@ public class WorldResource {
             JsonObject jO = new JsonObject();
             
             jO.addProperty("name", cities.get(i).getName());
-            jO.addProperty("continent", cities.get(i).getPopulation());
+            jO.addProperty("population", cities.get(i).getPopulation());
             jA.add(jO);
         }
         
@@ -160,4 +161,13 @@ public class WorldResource {
     }
 
  
+    @POST
+    @Path("/nc/{country}/{city}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public String createNewCity(@PathParam("country") String countryCode, @PathParam("city") String city) {
+        
+        return facade.createNewCity(countryCode, city);
+        
+    }
+    
 }

@@ -74,6 +74,15 @@ public class City implements Serializable {
     public City() {
     }
 
+    public City(String name, String district, long population, Country countryCode) {
+        this.name = name;
+        this.district = district;
+        this.population = population;
+        this.countryCode = countryCode;
+    }
+    
+    
+    
     public City(Integer id) {
         this.id = id;
     }

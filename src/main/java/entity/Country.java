@@ -152,6 +152,10 @@ public class Country implements Serializable {
         this.code2 = code2;
     }
 
+    public void addCity(City city) {
+        cityCollection.add(city);
+    }
+    
     public String getCode() {
         return code;
     }
